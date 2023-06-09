@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-zs%g%yx@zuxf7=!4m&lb=na4bdrkp)u%7aj6c2xf6e4exl#=^-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['akshar-authentication.onrender.com']
 
 
 # Application definition
