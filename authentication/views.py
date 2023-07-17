@@ -15,6 +15,9 @@ from . tokens import generate_token
 def home(request):
     return render(request, 'authentication/index.html')
 
+def rlogin(request):
+    return redirect('signin')
+
 
 def signup(request):
 
@@ -29,11 +32,11 @@ def signup(request):
 
         if User.objects.filter(username=username):
             messages.error(request,"username already exist please try some other username")
-            return redirect('home')
+            return redirect('signin')
 
         if User.objects.filter(email=email):
             messages.error(request,"Email alredy registred")
-            return redirect('home')
+            return redirect('signin')
  
         if len(username)>10:
             messages.error(request,"username must be under 10 characters")
@@ -43,7 +46,7 @@ def signup(request):
 
         if not username.isalnum():
             messages.error(request,"username must be alpha numeric")
-            return redirect('home')
+            return redirect('signin')
 
         myuser = User.objects.create_user(username, email, pass1)
         
@@ -98,7 +101,7 @@ def signup(request):
 
         return redirect('signin')
 
-    return render(request, 'authentication/signup.html')
+    return render(request, 'authentication/register.html')
 
 def signin(request):
 
@@ -114,15 +117,15 @@ def signin(request):
             return render(request, "authentication/index.html", {'fname': fname})
         else:
             messages.error(request, " bad credentials!")
-            return redirect('home')
-    return render(request, 'authentication/signin.html')
+            return redirect('signin')
+    return render(request, 'authentication/login.html')
 
 
 
 def signout(request):
     logout(request)
     messages.success(request, "logged out successfully")
-    return redirect('home')
+    return redirect('signin')
 
 
 def activate(request,uidb64,token):
@@ -136,22 +139,10 @@ def activate(request,uidb64,token):
         myuser.is_active=True
         myuser.save()
         login(request,myuser)
-        return redirect('home')
+        messages.success(request, "your account has been successfully activated.")
+        return redirect('signin')
 
     else:
         return render(request,'activation_failed.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     return redirect('home')

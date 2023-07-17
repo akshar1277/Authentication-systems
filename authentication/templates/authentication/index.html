@@ -1,58 +1,78 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Authentication system</title>
-  </head>
-  <body>
-
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-    <strong>Message: </strong>{{message}}
-    <button type="submit" class="close" date=dismiss="alert" aria-label="close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    {% endfor %}
-
-
-    <h1>wellcome to app</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'  %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css'  %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css'  %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme2.css'  %}" >
+</head>
+<body>
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message: </strong>{{message}}
+  <button type="submit" class="close" date=dismiss="alert" aria-label="close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  {% endfor %}
+    
+ 
 
     {% if user.is_authenticated %}
-    <h3> hello {{ fname }} </h3>
-    <h4> youre successfully logged in.</h4>
-    <button type="submit"><a href="/signout">SignOut</a></button>
-    {% else %}
-    <button type="submit"><a href="/signup">SignUP</a></button>
-    <button type="submit"><a href="/signin">SignIn</a></button>
+
+    <div style="display: flex;
+    color: white;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;">
+      <h1>Welcome to app</h1>
+      <h3> Hello {{ fname }} </h3>
+      <h4> You are successfully logged in.</h4>
+      <form action="/signout" method="post">
+        {% csrf_token %}
+        <div class="form-button">
+      <button style="margin-top: 13px;
+      margin-bottom: 25px;
+      font-weight: 400;
+      box-sizing: border-box;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      background-color: #fff;
+      color: #23394A;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
+      border-radius: 6px;
+      border-radius: 6px;
+      border-radius: 6px;
+      border: 0;
+      padding: 6px 28px;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      margin-right: 10px;
+      outline: none;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;" id="submit" type="submit" class="ibtn">SignOut</button>
+        </div>
+      </form>
+    </div>
+   
     {% endif %}
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+<script src="{% static 'js/jquery.min.js'  %}" ></script>
+<script src="{% static 'js/popper.min.js'  %}" ></script>
+<script src="{% static 'js/bootstrap.min.js'  %}"></script>
+<script src="{% static 'js/main.js'  %}" ></script>
+</body>
 </html>
+
+
